@@ -1,0 +1,79 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/tx  
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/aop  
+        http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+ 
+	<!-- 
+		Need DI a message into controller, so auto component scan is disabled, 
+		to avoid double create the movieController bean.
+                Only controller need this hack.
+	-->
+	<context:component-scan base-package="com.daa.piloto.controllers">
+		<context:exclude-filter type="regex"
+			expression="com.daa.piloto.controllers.Movie.*" />
+	</context:component-scan>
+ 
+	<mvc:annotation-driven />
+ 
+	<!-- Bean to show you Di in GAE, via Spring, also init the MovieController -->
+	<bean class="com.daa.piloto.controllers.MovieController">
+		<property name="message">
+			<value>Hello World</value>
+		</property>
+		<property name="emf" ref="emfService"/>
+			
+	</bean>
+ 
+	<bean name="emfService" class="com.daa.piloto.model.EMFService"/>
+	<!--  <bean
+	   class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/pages/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean>-->
+ 
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	<property name="ignoreUnresolvablePlaceholders" value="true"/>
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/properties/config.properties</value>								
+			</list>
+		</property>
+	</bean> 
+	
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="es" />
+	</bean>
+	
+	<!-- Utiliza tiles para resolver las vistas -->
+	<bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles/tiles-defs.xml</value>
+			</list>
+		</property>
+		
+	</bean>	
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" id="tilesViewResolver">
+
+		<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+
+	</bean>
+</beans>

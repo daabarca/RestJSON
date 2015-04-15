@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+<!-- ============================================================================= LAYOUTS  ================================================================================================ -->
+	<definition name="genericLayout" template="/WEB-INF/pages/common/layout/genericLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/pages/common/headermenu.jsp" type="template" />
+		<put-attribute name="body" value="" type="template" />
+		<put-attribute name="service" value="" type="string"/>
+		<put-attribute name="as" value="0" type="string"/>
+	</definition>
+	
+	<definition name="blankLayout" template="/WEB-INF/pages/common/layout/blankLayout.jsp">
+		<put-attribute name="body" value="" type="template" />
+	</definition>
+	
+	
+<!-- ========================================================================================================================================================================================== -->
+<definition name="prueba" template="/WEB-INF/pages/common/layout/genericLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/pages/common/headermenu.jsp" type="template" />
+		<put-attribute name="body" value="/WEB-INF/pages/prueba.jsp" />
+		<put-attribute name="service" value="" type="string"/>
+		<put-attribute name="as" value="0" type="string"/>
+		<put-attribute name="os" value="0" type="string"/>
+	</definition>
+<definition name="init" template="/WEB-INF/pages/common/layout/genericLayout.jsp">
+		<put-attribute name="header" value="/WEB-INF/pages/common/headermenu.jsp" type="template" />
+		<put-attribute name="body" value="/WEB-INF/pages/init.jsp" />
+		<put-attribute name="service" value="" type="string"/>
+		<put-attribute name="as" value="0" type="string"/>
+		<put-attribute name="os" value="0" type="string"/>
+	</definition>
+
+</tiles-definitions>
