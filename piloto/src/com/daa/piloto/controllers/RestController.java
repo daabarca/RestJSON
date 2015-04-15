@@ -16,8 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.daa.piloto.model.Carro;
 import com.daa.piloto.model.EMFService;
-import com.daa.piloto.model.Todo;
+
 
 
 
@@ -25,7 +26,7 @@ import com.daa.piloto.model.Todo;
  
 @Controller
 @RequestMapping("/piloto")
-public class MovieController {
+public class RestController {
  
 	//DI via Spring
 	String message;
@@ -34,14 +35,13 @@ public class MovieController {
 	@RequestMapping(value="init", method = RequestMethod.GET)
 	public ModelAndView getMovie( HttpServletRequest req,HttpServletResponse resp ) {
 		ModelAndView mv = new ModelAndView("init");
-		Todo todo = new Todo();
+		Carro carro = new Carro();
 		 
-        todo.setSummary("This is my todo");
  
         EntityManager em = emf.getEMF().createEntityManager();
-        List<Todo> todos = null;
+        List<Carro> todos = null;
         try {
-            em.persist(todo);
+            em.persist(carro);
             Query q = em.createQuery("select t from Todo t");
             todos = new ArrayList(q.getResultList());
         } finally {

@@ -6,10 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
  
 @Entity
-public class Todo {
+public class Carro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long todoId;
+    private Long Id;
+    
     private String summary;
  
     public String getSummary() {
